@@ -1,0 +1,79 @@
+{
+  "version": "1.0.0",
+  "requests": {
+    "CreateGroupRequest": {
+      "name": {
+        "type": "string",
+        "required": true,
+        "max_length": 50
+      }
+    },
+    "CreateParticipantRequest": {
+      "name": {
+        "type": "string",
+        "required": true,
+        "max_length": 50
+      }
+    },
+    "CreateExpenseRequest": {
+      "participant_id": {
+        "type": "integer",
+        "required": true
+      },
+      "description": {
+        "type": "string",
+        "required": true,
+        "max_length": 255
+      },
+      "amount": {
+        "type": "decimal",
+        "required": true,
+        "minimum": 0.01
+      }
+    }
+  },
+  "responses": {
+    "GroupResponse": {
+      "id": "integer",
+      "name": "string",
+      "created_at": "datetime"
+    },
+    "ParticipantResponse": {
+      "id": "integer",
+      "group_id": "integer",
+      "name": "string"
+    },
+    "ExpenseResponse": {
+      "id": "integer",
+      "group_id": "integer",
+      "participant_id": "integer",
+      "description": "string",
+      "amount": "decimal",
+      "created_at": "datetime"
+    },
+    "BalanceResponse": {
+      "group_id": "integer",
+      "total_expenses": "decimal",
+      "per_person_share": "decimal",
+      "balances": [
+        {
+          "participant_id": "integer",
+          "participant_name": "string",
+          "paid": "decimal",
+          "owes": "decimal",
+          "net_balance": "decimal"
+        }
+      ]
+    }
+  },
+  "errors": {
+    "ValidationError": {
+      "code": "VALIDATION_ERROR",
+      "message": "string"
+    },
+    "NotFoundError": {
+      "code": "NOT_FOUND",
+      "message": "string"
+    }
+  }
+}

@@ -1,0 +1,40 @@
+{
+  "version": "1.0.0",
+  "entities": {
+    "Group": {
+      "description": "Collection of participants sharing expenses.",
+      "fields": {
+        "id": "integer",
+        "name": "string",
+        "created_at": "datetime"
+      }
+    },
+    "Participant": {
+      "description": "Member of a group.",
+      "fields": {
+        "id": "integer",
+        "group_id": "integer",
+        "name": "string"
+      }
+    },
+    "Expense": {
+      "description": "Payment made by a participant.",
+      "fields": {
+        "id": "integer",
+        "group_id": "integer",
+        "participant_id": "integer",
+        "description": "string",
+        "amount": "decimal",
+        "created_at": "datetime"
+      }
+    }
+  },
+  "business_rules": [
+    "Group name is required.",
+    "Participant must belong to a group.",
+    "Expense must belong to a group.",
+    "Expense amount must be greater than zero.",
+    "Expense payer must be a participant in the group.",
+    "Balances are calculated by dividing total expenses evenly among participants."
+  ]
+}

@@ -1,0 +1,84 @@
+{
+  "version": "1.0.0",
+  "tables": {
+    "groups": {
+      "columns": {
+        "id": {
+          "type": "INTEGER",
+          "primary_key": true,
+          "auto_increment": true
+        },
+        "name": {
+          "type": "VARCHAR(50)",
+          "nullable": false
+        },
+        "created_at": {
+          "type": "TIMESTAMP",
+          "nullable": false
+        }
+      }
+    },
+    "participants": {
+      "columns": {
+        "id": {
+          "type": "INTEGER",
+          "primary_key": true,
+          "auto_increment": true
+        },
+        "group_id": {
+          "type": "INTEGER",
+          "nullable": false
+        },
+        "name": {
+          "type": "VARCHAR(50)",
+          "nullable": false
+        }
+      },
+      "foreign_keys": [
+        {
+          "column": "group_id",
+          "references": "groups.id"
+        }
+      ]
+    },
+    "expenses": {
+      "columns": {
+        "id": {
+          "type": "INTEGER",
+          "primary_key": true,
+          "auto_increment": true
+        },
+        "group_id": {
+          "type": "INTEGER",
+          "nullable": false
+        },
+        "participant_id": {
+          "type": "INTEGER",
+          "nullable": false
+        },
+        "description": {
+          "type": "VARCHAR(255)",
+          "nullable": false
+        },
+        "amount": {
+          "type": "DECIMAL(10,2)",
+          "nullable": false
+        },
+        "created_at": {
+          "type": "TIMESTAMP",
+          "nullable": false
+        }
+      },
+      "foreign_keys": [
+        {
+          "column": "group_id",
+          "references": "groups.id"
+        },
+        {
+          "column": "participant_id",
+          "references": "participants.id"
+        }
+      ]
+    }
+  }
+}
